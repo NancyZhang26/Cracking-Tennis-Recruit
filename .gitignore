@@ -1,17 +1,5 @@
 .env
-api/.env
-api/node_modules/
-backend/node_modules/
-frontend/node_modules/
-
-api/dist/
-archerwashere.py
-test.js
-
 .vscode
 __pycache__/
-db/__pycache__/
-scripts/__pycache__/
 *.pyc
-
 .DS_Store

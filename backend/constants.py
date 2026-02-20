@@ -9,8 +9,4 @@ SCHOOL_URLS = {
     "di_men_schools": "https://www.ncsasports.org/mens-tennis/division-1-colleges",
 }
 
-OTHER_URLS = {
-    "college_search": "https://www.utrsports.net/pages/college-tennis",
-}
-
-__all__ = ["SCHOOL_URLS", "OTHER_URLS"]
+__all__ = ["SCHOOL_URLS"]

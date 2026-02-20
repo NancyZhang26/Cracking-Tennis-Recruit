@@ -30,16 +30,16 @@ def insert_college_temp(college: College_Temp) -> None:
             ))
 
 # Test value
-college: College_Temp = {
-    "gender": "f",
-    "location": "Waltham, MA",
-    "division": "III",
-    "conference": "University Athletic Association",
-    "url": None,
-    "school_name": "Your mom",
-    "type": "Private"
-}
-insert_college_temp(college)
+# college: College_Temp = {
+#     "gender": "f",
+#     "location": "Waltham, MA",
+#     "division": "III",
+#     "conference": "University Athletic Association",
+#     "url": None,
+#     "school_name": "Your dad",
+#     "type": "Private"
+# }
+# insert_college_temp(college)
 
 def delete_college_temp(school_name: str, gender: str) -> None:
     sql = """
@@ -65,6 +65,6 @@ def select_college_temp_by_division(division: str) -> List[College_Temp]:
     
     return res
 
-print(select_college_temp_by_division('III'))
+# print(select_college_temp_by_division('III'))
 
-delete_college_temp("Your mom", "f")
+# delete_college_temp("Your mom", "f")

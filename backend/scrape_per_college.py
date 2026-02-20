@@ -24,9 +24,10 @@ def copy_types_into_college(list_of_college_temp: List[College_Temp]) -> List[Co
         colleges.append(c)
     return colleges
 
-# Testing
-res = copy_types_into_college(get_batch_of_college_temp('ii'))
-pprint(res[0])
+
+# TODO: Bathc request to get the school_id
+# def get_school_name_to_id_mapping(colleges: List[College]) -> List[College]:
+
 
 # GET:
 # school_id (id), club_id (schoolProfile/id), conference_id, url
@@ -43,17 +44,12 @@ def get_school_id_and_club_id_and_conference_id_and_url(college: College, school
     college['conference_id'] = data['schoolProfile']['conferenceId']
     college['official_url'] = data['url'];
     
-# Testing!
-test = res[0]
-get_school_id_and_club_id_and_conference_id_and_url(test, 1529)
-print(test)
-
 # Retrieving an array of utrs from the line up
 """
     @param: gender -> f or m
 """
-def get_line_up_arr(college: College, conference_id: int, gender: str) -> List[str]:
-    url = f"https://api.utrsports.net/v1/college/conference/{conference_id}/p6strength?gender={gender}" 
+def get_line_up_arr(college: College) -> List[str]:
+    url = f"https://api.utrsports.net/v1/college/conference/{college['conference_id']}/p6strength?gender={college['gender']}" 
 
     resp = requests.get(url, headers={}, timeout=10)
     data = resp.json()
@@ -82,16 +78,11 @@ def get_line_up_arr(college: College, conference_id: int, gender: str) -> List[s
 
     return line_up_player;
 
-college: College = {
-    'school_id': 1523,
-    'club_id': 378,
-    'gender': 'f'
-}
-print(get_line_up_arr(college, 97, 'f'))
-print(college)
-
-def get_roster_utr_arr(college: College, school_id: int, line_up_arr: List[int], line_up_player: List[str]) -> None:
-    url = f"https://api.utrsports.net/v1/club/{school_id}/school" 
+"""
+    Requires cookie to view the full roster
+"""
+def get_roster_utr_arr(college: College, line_up_player: List[str]) -> None:
+    url = f"https://api.utrsports.net/v1/club/{college['school_id']}/school" 
 
     headers = {
         "cookie": os.getenv("COOKIE_02_10"),
@@ -109,8 +100,17 @@ def get_roster_utr_arr(college: College, school_id: int, line_up_arr: List[int],
         if player_name not in line_up_player and player['singlesUtr']!=0.0:
             roster_arr.append(player['singlesUtr'])
 
-    for rating in line_up_arr:
+    for rating in college['line_up_utr']:
         roster_arr.append(rating)
 
     college['roster_utr'] = [roster_arr]
 
+def main():
+    temp = get_batch_of_college_temp('ii')
+    # for t in temp:
+        # print(t)
+    temp_c = copy_types_into_college(temp)
+    for c in temp_c:
+        print(c)
+
+main()
