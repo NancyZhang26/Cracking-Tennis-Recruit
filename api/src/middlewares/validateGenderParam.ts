@@ -1,19 +1,19 @@
 import { type Request, type Response, type NextFunction } from 'express';
 
-export const validateGenderParam = (req: Request, res: Response, next: NextFunction) => {
-    if (req.query.division === undefined) return next();
+export const validateDivisionParam = (req: Request, res: Response, next: NextFunction) => {
+    if (req.query.gender === undefined) return next();
 
-    const div = req.query.division;
+    const gender = req.query.gender;
     
-    if (typeof div != 'string') {
-        return res.status(400).json({message: 'Query param needs to be a string - i, or ii, or iii'});
+    if (typeof gender != 'string') {
+        return res.status(400).json({message: 'Query param needs to be a string - f / m'});
     }
 
-    const divisionInput = div.toLowerCase();
-    if (!['i', 'ii', 'iii'].includes(divisionInput)) {
-        return res.status(400).json({message: 'Division query needs to be - i, ii, or iii'}); 
+    const genderInput = gender.toLowerCase();
+    if (!['m', 'f'].includes(genderInput)) {
+        return res.status(400).json({message: 'Gender query needs to be - f / m'}); 
     } 
 
-    req.query.division = divisionInput; // Clean up
+    req.query.gender = genderInput; // Clean up
     next();
 }

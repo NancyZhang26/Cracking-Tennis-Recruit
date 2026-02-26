@@ -1,11 +1,18 @@
 import express from 'express';
 import router from './routes/itemRoutes.js';
 import dotenv from 'dotenv';
+import cors from 'cors';
 import { errorHandler } from './middlewares/errorHandler.js';
 
 dotenv.config(); 
 
 const app = express();
+
+// Cross origin resource sharing - Allow react to talk to api port
+app.use(cors({
+    origin: "http://localhost:5173",
+    credentials: true
+}));
 
 // Global body parsing
 app.use(

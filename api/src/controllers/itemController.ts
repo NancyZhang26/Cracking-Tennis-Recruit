@@ -1,6 +1,5 @@
 import type { Request, Response, NextFunction } from 'express';
 import { Pool } from 'pg';
-import type { Player, College, CollegeTemp } from '../models/models.ts';
 import dotenv from 'dotenv';
 dotenv.config();
 

@@ -106,11 +106,4 @@ def get_roster_utr_arr(college: College, line_up_player: List[str]) -> None:
     college['roster_utr'] = [roster_arr]
 
 def main():
-    temp = get_batch_of_college_temp('ii')
-    # for t in temp:
-        # print(t)
-    temp_c = copy_types_into_college(temp)
-    for c in temp_c:
-        print(c)
-
-main()
+   pass 

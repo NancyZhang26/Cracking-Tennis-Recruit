@@ -65,6 +65,38 @@ def select_college_temp_by_division(division: str) -> List[College_Temp]:
     
     return res
 
-# print(select_college_temp_by_division('III'))
+def select_college_temp_by_gender(gender: str) -> List[College_Temp]:
+    sql = """
+        SELECT school_name, gender, division, conference, location, url, type from colleges_temp
+        WHERE gender = %s
+    """
+
+    res = []
+
+    with get_conn() as conn:
+        with conn.cursor() as cur:
+            cur.execute(sql, (gender,))
+            res = cur.fetchall() # returns a list of tuple of dict
+    
+    return res
+
+def select_college_temp_by_division_and_gender(division: str, gender: str) -> List[College_Temp]:
+    sql = """
+        SELECT school_name, gender, division, conference, location, url, type from colleges_temp
+        WHERE division = %s and gender = %s
+    """
+
+    res = []
+
+    with get_conn() as conn:
+        with conn.cursor() as cur:
+            cur.execute(sql, (division, gender,))
+            res = cur.fetchall() # returns a list of tuple of dict
+    
+    return res
+
+# print(select_college_temp_by_division('i'))
 
 # delete_college_temp("Your mom", "f")
+
+# print(select_college_temp_by_division_and_gender('ii', 'f'))
